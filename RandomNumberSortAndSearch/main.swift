@@ -10,8 +10,10 @@ import Foundation
 
 var lengthOfArray: Int = 20
 var numberArray = [Int]()
+var intToFind: Int = 887
+var halfSize: Int = lengthOfArray;
 
-func printArray(numberArray: Array<Int>) {
+func printArray(array: [Int]) {
     for number in numberArray {
         print (number)
     }
@@ -80,7 +82,45 @@ func bubbleSort (array: [Int]) {
     
 }
 
-
+func searchForInt(intToFind: Int, startValue: Int, halfSize: Int, lengthOfArray: Int, array: [Int])
+{
+    var halfSizeFunc = halfSize
+    halfSizeFunc = halfSizeFunc/2
+    
+    if (halfSizeFunc == 0)
+    {
+        print ("\(intToFind) not found!")
+        return
+    }
+    
+    var left: Int = startValue + halfSizeFunc - 1
+    var right: Int = startValue + halfSizeFunc
+    
+    if (intToFind < numberArray[left])
+    {
+        // Left side
+        searchForInt(intToFind, startValue: 0, halfSize: halfSizeFunc, lengthOfArray: lengthOfArray, array:numberArray)
+    }
+    else if (intToFind > numberArray[right])
+    {
+        // Right side
+        searchForInt(intToFind, startValue: halfSizeFunc, halfSize: halfSizeFunc, lengthOfArray: lengthOfArray, array: numberArray)
+    }
+    else if (intToFind == numberArray[left])
+    {
+        // We found it
+        print ("\(intToFind) found in position \(startValue + halfSizeFunc).")
+        return
+    }
+    else if (intToFind == numberArray[right])
+    {
+        // We found it
+        print ("\(intToFind) found in position \(startValue + halfSizeFunc + 1).")
+        return
+    }
+    
+    return
+}
 
 numberArray = populateArray(lengthOfArray)
 print("The original array of unsorted random number:")
@@ -88,4 +128,5 @@ printArray(numberArray)
 bubbleSort(numberArray)
 print("The array sorted using bubble sort:")
 printArray(numberArray)
+searchForInt(intToFind, startValue: 0, halfSize: halfSize, lengthOfArray: lengthOfArray, array: numberArray)
 
